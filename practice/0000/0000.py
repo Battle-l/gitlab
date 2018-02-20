@@ -12,4 +12,3 @@ d.text((b_x-5,0),'5',font=fnt,fill=(220,20,60,255))
 
 
 txt.show()
-

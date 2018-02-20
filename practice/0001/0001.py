@@ -4,7 +4,8 @@ import random
 #生成八位随机字符串#
 def code():
 	char_random=''
-	lib_list=[str(x) for x in range(10)]+[chr(x) for x in range(65,91)]+[chr(x) for x in range(97,123)]   #生成库列表#
+	#生成库列表#
+	lib_list=[str(x) for x in range(10)]+[chr(x) for x in range(65,91)]+[chr(x) for x in range(97,123)]   
 	
 	while True:
 		num_random=int(random.random()*100)
