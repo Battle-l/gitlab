@@ -9,7 +9,7 @@ import os, re, sys, tkinter
 		a.	不在字符串中的'#'和有\'\'\'的行是注释
 		b.	有\n的行是空行
 '''
-filelists=[]
+filelists=set()
 #遍历目录
 def traversal(directory):
 	
@@ -22,7 +22,7 @@ def traversal(directory):
 		else:
 			if re.search('\.py$',i):
 				#print(fdpath)
-				filelists.append(fdpath)
+				filelists.add(fdpath)
 	#print (filelists)
 	#返回python源码文件列表（含绝对路径）
 	return filelists						
@@ -59,10 +59,11 @@ def file_lines(filelists):
 			note+=v
 	return note,blank,flines
 	
-def op(path,clear='yes'):
+def op(path,clear='no'):
 	#重置计数器
+	global filelists
 	if clear=='yes':
-		filelists=[]
+		filelists = set()
 	note,blank,flines=file_lines(traversal(path))
 	out=('在这些目录中共有%d行代码，其中有%d行注释，%d行空行。'%(flines,note,blank))
 	return out
@@ -76,6 +77,7 @@ if __name__=='__main__':
 	else:
 		while True:
 			mypath=input('请输入文件夹路径，路径尾部要有‘\\’(退出请输入exit):')
+			clear=input('是否要从新开始计数，是则输入\'yes\',否则按回车继续')
 			if mypath=='exit':
 				break
-			print(op(mypath))
+			print(op(mypath,clear))
