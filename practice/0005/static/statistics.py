@@ -13,7 +13,7 @@ filelists=set()
 #遍历目录
 def traversal(directory):
 	
-	fdpath=os.listdir(os.path.dirname(directory))
+	fdpath=os.listdir(directory)
 	for i in fdpath:
 		fdpath=os.path.join(directory,i)
 		
@@ -65,8 +65,6 @@ def op(p,clear='no'):
 	if clear=='yes':
 		filelists = set()
 	
-	# if re.search('\\$',p)==None:
-		# p=p+'\\'
 	note,blank,flines=file_lines(traversal(p))
 	out=('在这些目录中共有%d行代码，其中有%d行注释，%d行空行。'%(flines,note,blank))
 	return out
