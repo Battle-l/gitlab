@@ -1,4 +1,4 @@
-import os, re, sys, tkinter
+import os, re, sys
 
 '''
 第 0007 题： 有个目录，里面是你自己写过的程序，统计一下你写过多少行代码。包括空行和注释，但是要分别列出来。
@@ -59,13 +59,15 @@ def file_lines(filelists):
 			note+=v
 	return note,blank,flines
 	
-def op(path,clear='no'):
+def op(p,clear='no'):
 	#重置计数器
 	global filelists
 	if clear=='yes':
 		filelists = set()
-
-	note,blank,flines=file_lines(traversal(path))
+	
+	# if re.search('\\$',p)==None:
+		# p=p+'\\'
+	note,blank,flines=file_lines(traversal(p))
 	out=('在这些目录中共有%d行代码，其中有%d行注释，%d行空行。'%(flines,note,blank))
 	return out
 	

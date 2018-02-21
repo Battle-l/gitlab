@@ -1,7 +1,10 @@
 from tkinter import *
 from tkinter import ttk
 import tkinter.filedialog as dir
+
 import statistics as st
+
+import re
 
 '''
 一个输入框，一个按钮，一个选项
@@ -60,24 +63,32 @@ class AppUI():
 		band.pack(fill=BOTH,expand=YES,side=TOP)
 		
 		self.list_val=StringVar()
-		listbox=Listbox(band,listvariable=self.list_val,height=18)
-		listbox.pack(side=LEFT,fill=X,expand=YES)
+		self.list_val2=StringVar()
 		
+		listbox2=Listbox(band,listvariable=self.list_val2,height=1)
+		listbox2.pack(side=TOP,fill=X,expand=YES)
+		
+		listbox=Listbox(band,listvariable=self.list_val,height=17)
+		listbox.pack(side=LEFT,fill=BOTH,expand=YES)
+				
 		vertical_bar = ttk.Scrollbar(band,orient=VERTICAL,command=listbox.yview)
 		vertical_bar.pack(side=RIGHT,fill=Y)
 		listbox['yscrollcommand'] = vertical_bar.set
 		
 		
+		
 	def static_file(self):
-		'''
-		每次点击都先把路径输出到下面的框中，最后再输出一个结果
-		还有把清除选项做上去
-		'''
-		path.append(self.static_key.get()+'\n'+st.op(self.static_key.get()))
+		global path
+		path.add(self.static_key.get())
+		self.list_val2.set(st.op(self.static_key.get()))
+		path=list(path)
+		path.sort()
+		path=tuple(path)
 		self.list_val.set(path)
+		path=set(path)
 
 
 if __name__ == "__main__":
-	path=[]	
+	path=set()	
 	AppUI()
 #print(st.op('D:\\PyCharm\\gitlab\\practice\\'))
