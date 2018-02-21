@@ -64,6 +64,7 @@ def op(path,clear='no'):
 	global filelists
 	if clear=='yes':
 		filelists = set()
+
 	note,blank,flines=file_lines(traversal(path))
 	out=('在这些目录中共有%d行代码，其中有%d行注释，%d行空行。'%(flines,note,blank))
 	return out
